@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<!--
+<project name="testant" default="run" basedir="." >
+	<property name="src" value="src" />
+	<property name="dest" value="classes" />
+	<property name="hello_jar" value="hello.jar" />
+
+	
+	<target name="del">
+		<delete dir="${dest}" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${dest}" />
+	</target>
+	
+	<target name="compile" depends="init">
+		<echo message="开始编译" />
+		<echo message="........" />
+		<echo message="........" />
+		<javac srcdir="${src}" destdir="${dest}" />
+		<echo message="编译完成" />		
+	</target>
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="${hello_jar}" basedir="${dest}" />
+	</target>
+	
+	<target name="run" depends="jar">
+				<java classname="anttest.helloworld" classpath="${hello_jar}" />
+	</target>
+	
+	<target name="clean" >
+		<delete dir="${dest}" />
+		<delete file="${hello_jar}" />
+	</target>
+
+</project>
+
+-->
+
+<project name="testant" default="runtest" basedir="." >
+	<property name="src" value="src" />
+	<property name="dest" value="classes" />
+	<property name="hello_jar" value="hello.jar" />
+	<property name="libs" value="libs" />
+	<property name="result" value="test-output" />
+	<property name="file" value="testng.xml" />
+
+	<taskdef resource="testngtasks" classpath="${libs}/testng-6.8.5.jar"/>	
+
+
+	
+	<target name="del">
+		<delete dir="${dest}" />
+	</target>
+	
+	<target name="init">
+		<mkdir dir="${dest}" />
+	</target>
+	
+	<target name="compile" depends="init">
+		<echo message="开始编译" />
+		<echo message="........" />
+		<echo message="........" />
+		<javac srcdir="${src}" destdir="${dest}" classpathref="pathid" includeantruntime="off" />
+		<echo message="编译完成" />		
+	</target>
+	
+    <path id="pathid">
+        <fileset dir="${libs}" includes="*.jar"/>
+        <fileset dir="${libs}" includes="*.zip"/>
+        <pathelement location="${dest}"/>
+    </path>
+	
+    <target name="runtest" depends="compile">
+        <testng outputdir="${result}" classpathref="pathid">
+            <xmlfileset dir="." includes="${file}"/>
+        </testng>
+    </target>
+	
+	
+	<target name="jar" depends="compile">
+		<jar jarfile="${hello_jar}" basedir="${dest}" />
+	</target>
+	
+	<target name="run" depends="jar">
+				<java classname="anttest.helloworld" classpath="${hello_jar}" />
+	</target>
+	
+	<target name="clean" >
+		<delete dir="${dest}" />
+		<delete file="${hello_jar}" />
+	</target>
+
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default suite">
+  
+    <test verbose="1" name="testing">
+		<parameter name="username" value="13717504303" />
+    <classes>
+      <class name="anttest.helloworld" />
+	      <methods>
+		      	<include name="testecho" />
+	      </methods>
+    </classes>
+  </test> 
+
+  
+
+  
+  
+</suite> <!-- Default suite -->
